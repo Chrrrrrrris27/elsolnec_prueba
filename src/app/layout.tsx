@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import Link from "next/link";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +28,50 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col justify-between w-full bg-blue-50`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <header className="px-3 py-1.5 bg-primary-foreground w-full">
+          <nav className="mx-auto max-w-5xl flex justify-between items-center">
+            <div>
+              <Image
+                src={"https://www.elsolnec.org/wp-content/uploads/2020/08/cropped-el_sol_4color_wide_web.png"}
+                alt="elsolnec"
+                className="w-32 block md:w-48" width={200} height={100}
+              />
+            </div>
+            <ul className="flex items-center justify-end gap-2">
+              <li className="hover:underline hover:text-blue-900">
+                <Link
+                  href={"/users"}
+                >
+                  Usuarios
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={"/posts"}
+                >
+                  Publicaciones
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main className="mx-auto max-w-5xl w-full py-10 flex-12/12 px-2 lg:px-0">
+          <Providers>
+            {children}
+          </Providers>
+        </main>
+        <footer className="bg-blue-200 py-5 px-2">
+          <h3 className="mx-auto max-w-5xl text-center">
+            <span>
+              Hecho por:
+            </span>
+            <Link href={"https://christian-aguilar-portfolio.vercel.app/"} target="_blank">
+              Christian Aguilar
+            </Link>
+          </h3>
+        </footer>
       </body>
     </html>
   );
