@@ -1,13 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { getUsers } from "src/lib/api";
-import { User } from "src/lib/models/User";
 
 export default function UsersList() {
   const { data: users, error, isLoading } = useQuery({
     queryKey: ["users"],
-    queryFn: getUsers
+    queryFn: getUsers,
+    staleTime: 1000 * 60 * 10
   });
 
   if (isLoading) return <p>Cargando...</p>;
@@ -15,9 +16,15 @@ export default function UsersList() {
 
   return (
     <ul>
-      {users?.map((user: User) => (
-        <li key={user.id}>{user.name} - {user.email}</li>
-      ))}
+      {
+        users?.map(user => (
+          <li key={user.id}>
+            <Link href={`/users/${user.id}`}>
+              {user.name} - {user.email}
+            </Link>
+          </li>
+        ))
+      }
     </ul>
   );
 }

@@ -13,21 +13,18 @@ export default function UserPage({ params }: { params: Promise<Params>}) {
   const { id } = use(params);
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    queryClient.prefetchQuery({ queryKey: ["users"], queryFn: getUsers });
-  }, [queryClient]);
-
   const { data: users, error, isLoading } = useQuery<User[]>({
     queryKey: ["users"],
     queryFn: getUsers,
     initialData: queryClient.getQueryData(["users"]),
+    staleTime: 1000 * 60 * 10
   });
 
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
     if (users) {
-      setUser(users.find((user: User) => user.id.toString() === id));
+      setUser(users.find(user => user.id.toString() === id));
     }
   
   }, [users, id])
