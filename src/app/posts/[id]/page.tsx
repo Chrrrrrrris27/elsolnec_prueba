@@ -1,6 +1,7 @@
 "use client"
 
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 import { use } from "react";
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getPostById } from "src/lib/api";
@@ -37,6 +38,9 @@ export default function PostPage({ params }: { params: Promise<Params>}) {
         <div>
           <h1>{post?.title}</h1>
           <p>{post.body}</p>
+          <Link href={`/posts/${id}/comments`}>
+              Ver Comentarios
+          </Link>
         </div>
         :
         <p>No se encontró el post</p>
