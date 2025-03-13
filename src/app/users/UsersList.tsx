@@ -7,6 +7,7 @@ import { getUsers } from "src/lib/api";
 import { getFilteredUsers } from "src/lib/utils/queryFilters";
 import { User } from "src/lib/models/User";
 import { Input } from "src/components/ui/input";
+import { Button } from "src/components/ui/button";
 
 export default function UsersList() {
 
@@ -42,31 +43,49 @@ export default function UsersList() {
   if (error) return <p>Error al cargar los usuarios</p>;
   
   return (
-    <div>
-      <div>
+    <section className="flex flex-col items-center">
+      <div className="flex justify-end items-center gap-2 w-full">
         <Input
           name="filter"
           value={queryFilter}
           onChange={handleQueryChange}
           placeholder="Filtrar por..."
+          className="w-1xl"
         />
-        <button
+        <Button
           onClick={handleCleanFilter}
         >
           <span>Limpiar</span>
-        </button>
+        </Button>
       </div>
-      <ul>
+      <ul className="mt-5">
         {
           usersFiltered?.map(user => (
-            <li key={user.id}>
-              <Link href={`/users/${user.id}`}>
-                {user.name} - {user.email}
+            <li
+              key={user.id}
+              // className="my-2 border-2 rounded-lg hover:bg-secondary hover:cursor-pointer"
+            >
+              <Link 
+                href={`/users/${user.id}`}
+                className="p-3 my-2 border-2 rounded-lg hover:bg-secondary hover:cursor-pointer block"
+              >
+                <span className="text-2xl font-bold">
+                  {user.name}
+                </span>
+                <div className="text-s">
+                  <span>
+                    {user.username}
+                  </span>
+                  {" - "}
+                  <span className="ml-1">
+                    {user.email}
+                  </span>
+                </div>
               </Link>
             </li>
           ))
         }
       </ul>
-    </div>
+    </section>
   );
 }

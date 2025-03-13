@@ -30,24 +30,26 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col justify-between w-full bg-blue-50`}
       >
-        <header className="px-3 py-1.5 bg-primary-foreground w-full">
+        <header className="px-3 py-1.5 bg-secondary w-full">
           <nav className="mx-auto max-w-5xl flex justify-between items-center">
             <div>
-              <Image
-                src={"https://www.elsolnec.org/wp-content/uploads/2020/08/cropped-el_sol_4color_wide_web.png"}
-                alt="elsolnec"
-                className="w-32 block md:w-48" width={200} height={100}
-              />
+              <Link href={"/"}>
+                <Image
+                  src={"https://www.elsolnec.org/wp-content/uploads/2020/08/cropped-el_sol_4color_wide_web.png"}
+                  alt="elsolnec"
+                  className="w-32 block md:w-48" width={200} height={100}
+                />
+              </Link>
             </div>
             <ul className="flex items-center justify-end gap-2">
-              <li className="hover:underline hover:text-blue-900">
+              <li className="hover:underline hover:text-foreground">
                 <Link
                   href={"/users"}
                 >
                   Usuarios
                 </Link>
               </li>
-              <li>
+              <li className="hover:underline hover:text-foreground">
                 <Link
                   href={"/posts"}
                 >
@@ -62,7 +64,7 @@ export default function RootLayout({
             {children}
           </Providers>
         </main>
-        <footer className="bg-blue-200 py-5 px-2">
+        <footer className="bg-secondary py-5 px-2">
           <h3 className="mx-auto max-w-5xl text-center">
             <span>
               Hecho por:
