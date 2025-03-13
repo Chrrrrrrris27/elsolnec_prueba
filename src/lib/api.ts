@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "./models/User";
 import { Post } from "./models/Post";
-import { PostComment } from "./models/Comment";
+import { PostComment } from "./models/PostComment";
 
 const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com", 

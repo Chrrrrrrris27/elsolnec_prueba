@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "src/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "src/components/ui/dropdown-menu";
+import { Input } from "src/components/ui/input";
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getPosts } from "src/lib/api";
 import { Post } from "src/lib/models/Post";
@@ -77,10 +78,11 @@ export default function PostList() {
         </DropdownMenu>
       </div>
       <div>
-        <input
+        <Input
           name="filter"
           value={queryFilter}
           onChange={handleQueryChange}
+          placeholder="Filtrar por..."
         />
         <Button
           onClick={handleCleanFilter}

@@ -11,7 +11,7 @@ interface Params {
   id: string
 }
 
-export default function PostPage({ params }: { params: Promise<Params>}) {
+export default function PostPage({ params }: { params: Promise<Params> }) {
   const { id } = use(params);
   const queryClient = useQueryClient();
 

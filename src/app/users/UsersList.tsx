@@ -6,6 +6,7 @@ import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getUsers } from "src/lib/api";
 import { getFilteredUsers } from "src/lib/utils/queryFilters";
 import { User } from "src/lib/models/User";
+import { Input } from "src/components/ui/input";
 
 export default function UsersList() {
 
@@ -43,10 +44,11 @@ export default function UsersList() {
   return (
     <div>
       <div>
-        <input
+        <Input
           name="filter"
           value={queryFilter}
           onChange={handleQueryChange}
+          placeholder="Filtrar por..."
         />
         <button
           onClick={handleCleanFilter}

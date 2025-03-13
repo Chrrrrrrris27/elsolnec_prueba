@@ -3,6 +3,7 @@
 import { use } from "react";
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getCommentsByPost } from "src/lib/api";
+import CommentForm from "./CommentForm";
 
 interface Params {
   id: string,
@@ -30,6 +31,9 @@ export default function PostCommentsPage({ params }: { params: Promise<Params> }
           </div>
         ))
       }
+      <CommentForm
+        postId={id}
+      />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client"
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 import { use, useEffect, useState } from 'react';
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getUsers } from "src/lib/api";
@@ -43,6 +44,10 @@ export default function UserPage({ params }: { params: Promise<Params>}) {
         :
         <p>No se encontró el usuario</p>
       }
+
+      <Link href={"/users"}>
+        Ir a lista de usuarios
+      </Link>
     </div>
   );
 }
