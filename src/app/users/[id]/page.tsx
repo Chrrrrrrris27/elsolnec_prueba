@@ -1,6 +1,7 @@
 "use client"
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { use, useEffect, useState } from 'react';
+import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getUsers } from "src/lib/api";
 import { User } from "src/lib/models/User";
 
@@ -13,12 +14,13 @@ export default function UserPage({ params }: { params: Promise<Params>}) {
   const { id } = use(params);
   const queryClient = useQueryClient();
 
-  const { data: users, error, isLoading } = useQuery<User[]>({
-    queryKey: ["users"],
-    queryFn: getUsers,
-    initialData: queryClient.getQueryData(["users"]),
-    staleTime: 1000 * 60 * 10
-  });
+  const { data: users, error, isLoading } = useFetchQuery<User[]>(
+    ["users"],
+    getUsers,
+    {
+      initialData: queryClient.getQueryData(["users"])
+    }
+  );
 
   const [user, setUser] = useState<User>();
 

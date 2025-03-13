@@ -1,16 +1,15 @@
 "use client"
 
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getPosts } from "src/lib/api";
 
 export default function PostList() {
 
-  const { data: posts, error, isLoading } = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-    staleTime: 1000 * 60 * 10
-  });
+  const { data: posts, error, isLoading } = useFetchQuery(
+    ["posts"],
+    getPosts,
+  );
 
   if (isLoading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar los usuarios</p>;

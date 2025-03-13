@@ -1,7 +1,8 @@
 "use client"
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { use } from "react";
+import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getPostById } from "src/lib/api";
 import { Post } from "src/lib/models/Post";
 
@@ -17,13 +18,14 @@ export default function PostPage({ params }: { params: Promise<Params>}) {
 
   const cachedPost = cachedPosts?.find(post => post.id.toString() === id);
 
-  const { data: post, error, isLoading } = useQuery({
-    queryKey: ["posts", id],
-    queryFn: () => getPostById(id),
-    enabled: !cachedPost,
-    initialData: cachedPost,
-    staleTime: 1000 * 60 * 10
-  });
+  const { data: post, error, isLoading } = useFetchQuery(
+    ["posts", id],
+    () => getPostById(id),
+    {
+      enabled: !cachedPost,
+      initialData: cachedPost,
+    }
+  );
 
   if (isLoading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar los usuarios</p>;
