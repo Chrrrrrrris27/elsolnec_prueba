@@ -1,9 +1,9 @@
-import PostList from "./PostList";
+import PostList from "../../components/posts/PostList";
 
 export default function PostsPage() {
   return (
     <main>
-          <h1>Lista de Posts</h1>
+          <h1 className="font-bold text-center text-5xl mb-5">Publicaciones</h1>
           <PostList/>
     </main>
   );

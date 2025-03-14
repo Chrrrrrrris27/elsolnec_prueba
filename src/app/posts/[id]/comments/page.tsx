@@ -3,7 +3,7 @@
 import { use } from "react";
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getCommentsByPost } from "src/lib/api";
-import CommentForm from "./CommentForm";
+import CommentForm from "../../../../components/posts/CommentForm";
 
 interface Params {
   id: string,

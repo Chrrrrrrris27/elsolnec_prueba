@@ -8,6 +8,7 @@ import { getFilteredUsers } from "src/lib/utils/queryFilters";
 import { User } from "src/lib/models/User";
 import { Input } from "src/components/ui/input";
 import { Button } from "src/components/ui/button";
+import { X } from "lucide-react";
 
 export default function UsersList() {
 
@@ -54,8 +55,10 @@ export default function UsersList() {
         />
         <Button
           onClick={handleCleanFilter}
+          variant={"outline"}
         >
-          <span>Limpiar</span>
+          Limpiar
+          <X className="text-destructive"/>
         </Button>
       </div>
       <ul className="mt-5">
