@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
+# Prueba técnica ELSOLNEC
+## Autor: Christian Aguilar
+## Tecnologías utilizadas
+- NEXTJS 14
+- ReactJS
+- TypeScript
+- TanStack Query
+- ShadCN
+- Tailwind
+- API [{JSON} Placeholder](https://jsonplaceholder.typicode.com/)
+  
 ## Getting Started
 
-First, run the development server:
-
+First, install the dependencies needed for the project:
+```bash
+npm install
+```
+After, run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Especificaciones técnicas
+### Organización del proyecto
+- src
+    - app (Sistema de rutas principal)
+    - components (Componentes globales y reutilizables de la app, creados desde cero y también agregados de ShadCN)
+    - config (Configuraciones generales del proyecto y constantes)
+    - hooks (Custom hooks como useFetchQuery para realizar peticiones con TanStack Query)
+    - lib (comprende los modelos e interfaces de la aplicación junto con funciones globales)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Navegación y funcionalidades:
+- /users -> página principal: muestra la lista de usuarios disponibles junto a un filtro por nombre o username y cada usuario permite navegar a su página individual (/users/id).
+- /users/id -> muestra la información detallada del usuario
+- /posts -> muestra la lista de posts con su autor y un call to action que permite mostrar más información del post (/posts/id) paginados (10 por página), aedmás cuenta con filtro de ordenamiento por título y búsqueda por título.
+- /posts/id -> muestra la información detallada de cada post por su id permitiendo navegar a los comentarios del mismo (/posts/id/comments)
+- /posts/id/comments -> muestra los comentarios del post y permite añadir un nuevo comentario.
 
-## Learn More
+Las páginas principales se mantienen como Server Components para así manetener una carga rápida de las mismas, y solo uitilizar SSR cuando es completamente necesaria la interacción del usuario y actualización de estados.
+Se buscó mantener una arqquitectura limpia implementando componentes que cumplan una única función permitiendo fácil escalabilidad, reutilización de componentes y evitar sobre cargas en los mismos.
+ 
 
-To learn more about Next.js, take a look at the following resources:
+### Estructura de React Query
+- Almacenamiento de usuarios: query["users"]
+- Almacenamiento de posts: query["posts"]
+- Almacenamiento de comentarios: query["posts", id, "comments"]
+  
+### Beneficios de utilizar React Query
+- Su almacenamiento de data en caché evitó llamados inncesarios de API al realizar navegación entre las diferentes páginas de la aplicación.
+- Evitó la utilización de gestores de estado como Redux o context de React para tener persistencia de los datos tanto al leer APIs como al agregar nuevo datos del usario (como un nuevo comentario).
+- Realiza el refetch automático de la data cuando sea necesario o la data es obsoleta.
+- Permite un óptimo manejo de estado en las peticiones, lo cual permite darle una óptima respuesta en UI al usuario cuando hay data, está cargando o se tiene algún error.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    
