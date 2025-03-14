@@ -69,7 +69,10 @@ export default function RootLayout({
             <span>
               Hecho por:
             </span>
-            <Link href={"https://christian-aguilar-portfolio.vercel.app/"} target="_blank">
+            <Link 
+              href={"https://christian-aguilar-portfolio.vercel.app/"} target="_blank"
+              className="font-medium hover:text-primary hover:underline ml-1"
+            >
               Christian Aguilar
             </Link>
           </h3>

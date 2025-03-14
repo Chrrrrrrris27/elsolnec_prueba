@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Building2, CircleUser, Globe, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { use, useEffect, useState } from 'react';
+import { ErrorMessage } from "src/components/ui/error_message";
 import { Loader } from "src/components/ui/loader";
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getUsers } from "src/lib/api";
@@ -36,7 +37,7 @@ export default function UserPage({ params }: { params: Promise<Params>}) {
   
 
   if (isLoading) return <Loader isLoading/>;
-  if (error) return <p>Error al cargar los usuarios</p>;
+  if (error) return <ErrorMessage/>;
 
   return (
     <div>

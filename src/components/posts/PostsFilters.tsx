@@ -1,4 +1,3 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button } from "src/components/ui/button";
@@ -7,14 +6,12 @@ import { Input } from "src/components/ui/input";
 import { Post } from "src/lib/models/Post";
 import { getFilteredPosts, sortPostsByTitle } from "src/lib/utils/queryFilters";
 
-export default function PostsFilters({setPostsFiltered}: {
+export default function PostsFilters({postsFiltered, setPostsFiltered}: {
+  postsFiltered: Post[],
   setPostsFiltered: Dispatch<SetStateAction<Post[]>>
 }) {
 
-  const queryClient = useQueryClient();
   const [queryFilter, setQueryFilter] = useState<string>("");
-
-  const posts = queryClient.getQueryData<Post[]>(["posts"]);
 
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQueryFilter(e.target.value);
@@ -22,9 +19,7 @@ export default function PostsFilters({setPostsFiltered}: {
   
   const handleCleanFilter = () => {
     setQueryFilter("");
-    if (posts) {
-      setPostsFiltered(posts);
-    }
+    setPostsFiltered(postsFiltered);
   }
 
   const handleSortAscPosts = () => {
@@ -36,15 +31,15 @@ export default function PostsFilters({setPostsFiltered}: {
   }
 
   useEffect(() => {
-    if (queryFilter.length > 0 && posts) {
-      const filteredPosts = getFilteredPosts(queryFilter, posts);
+    if (queryFilter.length > 0) {
+      const filteredPosts = getFilteredPosts(queryFilter, postsFiltered);
       setPostsFiltered(filteredPosts);
     } else {
-      setPostsFiltered(posts || []);
+      setPostsFiltered(postsFiltered);
     }
   
     
-  }, [queryFilter, posts, ,setPostsFiltered]) 
+  }, [queryFilter, postsFiltered ,setPostsFiltered]) 
 
   return (
     <div className="flex flex-wrap gap-2 justify-end items-center">

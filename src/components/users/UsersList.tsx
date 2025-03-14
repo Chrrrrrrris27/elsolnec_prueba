@@ -10,6 +10,7 @@ import { Input } from "src/components/ui/input";
 import { Button } from "src/components/ui/button";
 import { X } from "lucide-react";
 import { Loader } from "../ui/loader";
+import { ErrorMessage } from "../ui/error_message";
 
 export default function UsersList() {
 
@@ -42,7 +43,7 @@ export default function UsersList() {
   
 
   if (isLoading) return <Loader isLoading/>;
-  if (error) return <p>Error al cargar los usuarios</p>;
+  if (error) return <ErrorMessage/>;
   
   return (
     <section className="flex flex-col items-center">
