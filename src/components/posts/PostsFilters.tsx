@@ -50,16 +50,17 @@ export default function PostsFilters({setPostsFiltered}: {
     <div className="flex flex-wrap gap-2 justify-end items-center">
       <div>
         <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button>
-              Ordenar por titulo
-            </Button>
+          <DropdownMenuTrigger
+            className="rounded-lg p-2 bg-primary text-primary-foreground shadow-xs hover:bg-primary/90"
+          >
+            Ordenar por titulo
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Button
                 onClick={handleSortAscPosts}
+                className="w-full"
               >
                 Ascendente
               </Button>
@@ -67,6 +68,7 @@ export default function PostsFilters({setPostsFiltered}: {
             <DropdownMenuItem>
               <Button
                 onClick={handleSortDscPosts}
+                className="w-full"
               >
                 Descendente
               </Button>

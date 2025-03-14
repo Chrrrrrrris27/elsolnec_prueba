@@ -6,6 +6,7 @@ import { Input } from "src/components/ui/input";
 import { Button } from "src/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 import { PostComment } from "src/lib/models/PostComment";
+import { Textarea } from "../ui/textarea";
 
 const formSchema = z.object({
   name: z.string().min(5, "El nombre debe tener al menos 5 caracteres"),
@@ -51,57 +52,66 @@ export default function CommentForm({ postId }: { postId: string }) {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        {/* Email */}
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Email" {...field}/>
-              </FormControl>
-              <FormMessage/>
-            </FormItem>
-          )}
-        />
-        {/* Comment name */}
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Nombre del comentario" {...field}/>
-              </FormControl>
-              <FormMessage/>
-            </FormItem>
-          )}
-        />
-        {/* Comment body */}
-        <FormField
-          control={form.control}
-          name="comment"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Comentario" {...field}/>
-              </FormControl>
-              <FormMessage/>
-            </FormItem>
-          )}
-        />
-        {/* Submit */}
-
-        <Button
-          type="submit"
+    <div className="w-full md:w-2/3 lg:w-1/2  my-10">
+      <h4>Agregar comentario</h4>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 mt-3"
         >
-          Publicar
-        </Button>
-      </form>
-    </Form>
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Email" {...field}/>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}
+          />
+          {/* Comment name */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Nombre del comentario" {...field}/>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}
+          />
+          {/* Comment body */}
+
+          <FormField
+            control={form.control}
+            name="comment"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  {/* <Input placeholder="Comentario" {...field}/> */}
+                  <Textarea
+                    {...field}
+                    placeholder="Comentario"
+                  />
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}
+          />
+          {/* Submit */}
+
+          <Button
+            type="submit"
+          >
+            Publicar
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 }
