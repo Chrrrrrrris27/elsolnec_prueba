@@ -9,6 +9,7 @@ import { User } from "src/lib/models/User";
 import { Input } from "src/components/ui/input";
 import { Button } from "src/components/ui/button";
 import { X } from "lucide-react";
+import { Loader } from "../ui/loader";
 
 export default function UsersList() {
 
@@ -40,7 +41,7 @@ export default function UsersList() {
   }, [queryFilter, users])
   
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <Loader isLoading/>;
   if (error) return <p>Error al cargar los usuarios</p>;
   
   return (

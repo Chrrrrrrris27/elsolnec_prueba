@@ -6,6 +6,7 @@ import { getPosts } from "src/lib/api";
 import { Post } from "src/lib/models/Post";
 import PostsFilters from "./PostsFilters";
 import PostCard from "./PostCard";
+import { Loader } from "../ui/loader";
 
 export default function PostList() {
 
@@ -24,7 +25,7 @@ export default function PostList() {
   }, [posts]);
   
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <Loader isLoading/>;
   if (error) return <p>Error al cargar los usuarios</p>;
 
   return (

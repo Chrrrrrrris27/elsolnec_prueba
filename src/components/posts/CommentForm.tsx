@@ -7,7 +7,7 @@ import { Button } from "src/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 import { PostComment } from "src/lib/models/PostComment";
 import { Textarea } from "../ui/textarea";
-import DialogSuccess from "../dialogs/DialogSuccess";
+import DialogSuccess from "../ui/DialogSuccess";
 import { useState } from "react";
 
 const formSchema = z.object({

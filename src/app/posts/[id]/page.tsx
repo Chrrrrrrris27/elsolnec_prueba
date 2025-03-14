@@ -3,6 +3,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { use, useEffect, useState } from "react";
+import { Loader } from "src/components/ui/loader";
 import { useFetchQuery } from "src/hooks/useFetchQuery";
 import { getPostById, getUsers } from "src/lib/api";
 import { Post } from "src/lib/models/Post";
@@ -47,7 +48,7 @@ export default function PostPage({ params }: { params: Promise<Params> }) {
   
   }, [users, post])
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <Loader isLoading/>;
   if (error) return <p>Error al cargar los usuarios</p>;
 
   return (

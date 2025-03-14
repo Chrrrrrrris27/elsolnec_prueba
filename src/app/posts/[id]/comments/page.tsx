@@ -7,6 +7,7 @@ import CommentForm from "../../../../components/posts/CommentForm";
 import Comment from "src/components/posts/Comment";
 import { Post } from "src/lib/models/Post";
 import { useQueryClient } from "@tanstack/react-query";
+import { Loader } from "src/components/ui/loader";
 
 interface Params {
   id: string,
@@ -36,7 +37,7 @@ export default function PostCommentsPage({ params }: { params: Promise<Params> }
     }
   );
 
-  if (commentsIsLoading || postIsLoading) return <p>Cargando...</p>;
+  if (commentsIsLoading || postIsLoading) return <Loader isLoading={commentsIsLoading || postIsLoading}/>;
   if (commentsError || postError) return <p>Error al cargar los usuarios</p>;
 
   return (
