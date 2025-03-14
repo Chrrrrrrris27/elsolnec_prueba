@@ -47,7 +47,7 @@ export default function UserPage({ params }: { params: Promise<Params>}) {
           >
             {user.name}
           </h1>
-          <div className="flex justify-between mt-5">
+          <div className="flex flex-wrap justify-between mt-5">
             <div>
               <h2 className="flex items-center gap-1.5 text-2xl font-medium">
                 <Building2 className="text-primary"/>

@@ -7,6 +7,8 @@ import { Button } from "src/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 import { PostComment } from "src/lib/models/PostComment";
 import { Textarea } from "../ui/textarea";
+import DialogSuccess from "../dialogs/DialogSuccess";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(5, "El nombre debe tener al menos 5 caracteres"),
@@ -31,6 +33,8 @@ export default function CommentForm({ postId }: { postId: string }) {
     }
   })
 
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
   const queryClient = useQueryClient();
 
   const onSubmit = (data: FormData) => {
@@ -49,6 +53,8 @@ export default function CommentForm({ postId }: { postId: string }) {
     queryClient.setQueryData<PostComment[]>(["posts", postId, "comments"], () => {
       return newComments;
     })
+
+    setOpenModal(true);
   }
 
   return (
@@ -112,6 +118,11 @@ export default function CommentForm({ postId }: { postId: string }) {
           </Button>
         </form>
       </Form>
+      <DialogSuccess
+        message="Comentario agregado!"
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+      />
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function PostList() {
           postsFiltered?.map(post => (
             <li 
               key={post.id}
-              className="flex-1/5 h-52 min-w-40"
+              className="flex-1 sm:flex-[0_1_30%] lg:flex-[0_1_23%] h-52 min-w-40"
             >
               <PostCard
                 title={post.title}
